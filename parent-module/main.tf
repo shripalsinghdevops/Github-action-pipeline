@@ -1,26 +1,26 @@
 module "rgs" {
-source = "../child-modules/azurerm_resource_group"
-rgs = var.rgs
+  source = "../child-modules/azurerm_resource_group"
+  rgs    = var.rgs
 }
 
 module "vnet" {
-source = "../child-modules/azurerm_vnet"
-depends_on = [ module.rgs ]
-vnet = var.vnet
+  source     = "../child-modules/azurerm_vnet"
+  depends_on = [module.rgs]
+  vnet       = var.vnet
 }
 
 module "subnet" {
-source = "../child-modules/azurerm_subnet"
-depends_on = [ module.vnet ]
+  source     = "../child-modules/azurerm_subnet"
+  depends_on = [module.vnet]
 
-subnet = var.subnet
+  subnet = var.subnet
 }
 
 module "pubip" {
-    source = "../child-modules/azurerm_pubip"
-depends_on = [ module.rgs ]
-    pubip = var.pubip
-  
+  source     = "../child-modules/azurerm_pubip"
+  depends_on = [module.rgs]
+  pubip      = var.pubip
+
 }
 module "bastion" {
 
